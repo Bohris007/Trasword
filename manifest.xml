@@ -7,7 +7,7 @@
   xsi:type="TaskPaneApp">
 
   <Id>b5f5a0e0-5f1a-4e1e-9b3c-5e8e9e8e9e8e</Id>
-  <Version>1.0.0.3</Version>
+  <Version>1.0.0.4</Version>
   <ProviderName>Your Name or Company</ProviderName>
   <DefaultLocale>zh-CN</DefaultLocale>
   <DisplayName DefaultValue="Trasword 翻译器" />
