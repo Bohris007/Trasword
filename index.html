@@ -8,6 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         #apiKeyInput { display: none; }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { margin: 5px; padding: 5px 10px; }
+        #result { margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -26,10 +29,13 @@
 
         Office.onReady((info) => {
             if (info.host === Office.HostType.Word) {
+                console.log("Office.js is ready in Word");
                 document.getElementById('settingsBtn').onclick = toggleSettings;
                 document.getElementById('saveApiKey').onclick = saveApiKey;
                 document.getElementById('translateToChinese').onclick = () => translateSelection('Chinese');
                 document.getElementById('translateToEnglish').onclick = () => translateSelection('English');
+            } else {
+                console.log("Not in Word context");
             }
         });
 
@@ -50,31 +56,33 @@
                 return;
             }
 
-            await Word.run(async (context) => {
-                const range = context.document.getSelection();
-                range.load("text");
-                await context.sync();
+            try {
+                await Word.run(async (context) => {
+                    const range = context.document.getSelection();
+                    range.load("text");
+                    await context.sync();
 
-                const selectedText = range.text;
-                if (selectedText) {
-                    try {
-                        const translatedText = await translateWithOpenAI(selectedText, targetLanguage);
-                        document.getElementById('result').innerHTML = `Original: ${selectedText}<br>Translated: ${translatedText}`;
-                        
-                        // Insert translated text
-                        const insertLocation = range.getInsertionPoint();
-                        insertLocation.insertText("\n" + translatedText + "\n", Word.InsertLocation.after);
-                        await context.sync();
-                    } catch (error) {
-                        document.getElementById('result').innerHTML = "An error occurred during translation: " + error.message;
+                    const selectedText = range.text;
+                    if (selectedText) {
+                        try {
+                            const translatedText = await translateWithOpenAI(selectedText, targetLanguage);
+                            document.getElementById('result').innerHTML = `Original: ${selectedText}<br>Translated: ${translatedText}`;
+                            
+                            // Insert translated text
+                            const insertLocation = range.getInsertionPoint();
+                            insertLocation.insertText("\n" + translatedText + "\n", Word.InsertLocation.after);
+                            await context.sync();
+                        } catch (error) {
+                            document.getElementById('result').innerHTML = "An error occurred during translation: " + error.message;
+                        }
+                    } else {
+                        document.getElementById('result').innerHTML = "Please select some text to translate.";
                     }
-                } else {
-                    document.getElementById('result').innerHTML = "Please select some text to translate.";
-                }
-            }).catch(error => {
+                });
+            } catch (error) {
                 console.error(error);
-                document.getElementById('result').innerHTML = "An error occurred during translation.";
-            });
+                document.getElementById('result').innerHTML = "An error occurred: " + error.message;
+            }
         }
 
         async function translateWithOpenAI(text, targetLanguage) {
