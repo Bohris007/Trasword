@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
            xsi:type="TaskPaneApp">
-  <Id>12345678-1234-1234-1234-123456789012</Id>
+  <Id>b5f5a0e0-5f1a-4e1e-9b3c-5e8e9e8e9e8e</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>YourName</ProviderName>
+  <ProviderName>Your Name or Company</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Trasword Translator" />
   <Description DefaultValue="Translate selected text in Word"/>
+  <IconUrl DefaultValue="https://bohris007.github.io/Trasword/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://bohris007.github.io/Trasword/assets/icon-64.png"/>
+  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <AppDomains>
+    <AppDomain>https://bohris007.github.io</AppDomain>
+  </AppDomains>
   <Hosts>
     <Host Name="Document" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://yourusername.github.io/trasword/index.html" />
+    <SourceLocation DefaultValue="https://bohris007.github.io/Trasword/index.html" />
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
 </OfficeApp>
