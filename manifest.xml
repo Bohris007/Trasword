@@ -5,11 +5,11 @@
            xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
            xsi:type="TaskPaneApp">
   <Id>b5f5a0e0-5f1a-4e1e-9b3c-5e8e9e8e9e8e</Id>
-  <Version>1.0.0.1</Version>
+  <Version>1.0.0.2</Version>
   <ProviderName>Your Name or Company</ProviderName>
-  <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Trasword Translator" />
-  <Description DefaultValue="Translate selected text in Word"/>
+  <DefaultLocale>zh-CN</DefaultLocale>
+  <DisplayName DefaultValue="Trasword 翻译器" />
+  <Description DefaultValue="在 Word 中翻译选中的文本"/>
   <IconUrl DefaultValue="https://bohris007.github.io/Trasword/assets/icon-32.png" />
   <HighResolutionIconUrl DefaultValue="https://bohris007.github.io/Trasword/assets/icon-64.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
@@ -76,13 +76,13 @@
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with Trasword Translator!" />
-        <bt:String id="CommandsGroup.Label" DefaultValue="Trasword Commands" />
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Trasword" />
+        <bt:String id="GetStarted.Title" DefaultValue="开始使用 Trasword 翻译器！" />
+        <bt:String id="CommandsGroup.Label" DefaultValue="Trasword 命令" />
+        <bt:String id="TaskpaneButton.Label" DefaultValue="显示 Trasword" />
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Trasword Translator was loaded successfully. Go to the HOME tab and click the 'Show Trasword' button to get started." />
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show Trasword" />
+        <bt:String id="GetStarted.Description" DefaultValue="Trasword 翻译器已成功加载。转到"开始"选项卡并单击"显示 Trasword"按钮以开始使用。" />
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="点击显示 Trasword" />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

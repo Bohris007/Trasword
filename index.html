@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title>Trasword Translator</title>
+    <title>Trasword 翻译器</title>
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
@@ -14,14 +14,14 @@
     </style>
 </head>
 <body>
-    <h1>Trasword Translator</h1>
-    <button id="settingsBtn">Settings</button>
+    <h1>Trasword 翻译器</h1>
+    <button id="settingsBtn">设置</button>
     <div id="apiKeyInput">
-        <input type="text" id="apiKey" placeholder="Enter OpenAI API Key">
-        <button id="saveApiKey">Save</button>
+        <input type="text" id="apiKey" placeholder="输入 OpenAI API 密钥">
+        <button id="saveApiKey">保存</button>
     </div>
-    <button id="translateToChinese">Translate to Chinese</button>
-    <button id="translateToEnglish">Translate to English</button>
+    <button id="translateToChinese">中文</button>
+    <button id="translateToEnglish">英文</button>
     <div id="result"></div>
 
     <script>
@@ -29,13 +29,13 @@
 
         Office.onReady((info) => {
             if (info.host === Office.HostType.Word) {
-                console.log("Office.js is ready in Word");
+                console.log("Office.js 在 Word 中准备就绪");
                 document.getElementById('settingsBtn').onclick = toggleSettings;
                 document.getElementById('saveApiKey').onclick = saveApiKey;
                 document.getElementById('translateToChinese').onclick = () => translateSelection('Chinese');
                 document.getElementById('translateToEnglish').onclick = () => translateSelection('English');
             } else {
-                console.log("Not in Word context");
+                console.log("不在 Word 环境中");
             }
         });
 
@@ -47,12 +47,12 @@
         function saveApiKey() {
             apiKey = document.getElementById('apiKey').value;
             document.getElementById('apiKeyInput').style.display = 'none';
-            document.getElementById('result').innerHTML = "API Key saved!";
+            document.getElementById('result').innerHTML = "API 密钥已保存！";
         }
 
         async function translateSelection(targetLanguage) {
             if (!apiKey) {
-                document.getElementById('result').innerHTML = "Please set your OpenAI API Key in Settings first.";
+                document.getElementById('result').innerHTML = "请先在设置中设置您的 OpenAI API 密钥。";
                 return;
             }
 
@@ -66,22 +66,21 @@
                     if (selectedText) {
                         try {
                             const translatedText = await translateWithOpenAI(selectedText, targetLanguage);
-                            document.getElementById('result').innerHTML = `Original: ${selectedText}<br>Translated: ${translatedText}`;
+                            document.getElementById('result').innerHTML = `原文: ${selectedText}<br>译文: ${translatedText}`;
                             
-                            // Insert translated text
-                            const insertLocation = range.getInsertionPoint();
-                            insertLocation.insertText("\n" + translatedText + "\n", Word.InsertLocation.after);
+                            // 插入翻译后的文本
+                            range.insertText("\n" + translatedText + "\n", Word.InsertLocation.After);
                             await context.sync();
                         } catch (error) {
-                            document.getElementById('result').innerHTML = "An error occurred during translation: " + error.message;
+                            document.getElementById('result').innerHTML = "翻译过程中发生错误: " + error.message;
                         }
                     } else {
-                        document.getElementById('result').innerHTML = "Please select some text to translate.";
+                        document.getElementById('result').innerHTML = "请选择要翻译的文本。";
                     }
                 });
             } catch (error) {
                 console.error(error);
-                document.getElementById('result').innerHTML = "An error occurred: " + error.message;
+                document.getElementById('result').innerHTML = "发生错误: " + error.message;
             }
         }
 
